@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>周桑炜 · Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0d1117;
+  --bg2:     #161b22;
+  --bg3:     #21262d;
+  --border:  rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.13);
+  --text1:   #e6edf3;
+  --text2:   #8b949e;
+  --text3:   #6e7681;
+  --blue:    #58a6ff;
+  --green:   #3fb950;
+  --amber:   #d29922;
+  --red:     #f85149;
+  --purple:  #bc8cff;
+  --mono:    'JetBrains Mono', monospace;
+  --sans:    'Noto Sans SC', sans-serif;
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--sans);
+  background: var(--bg);
+  color: var(--text1);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 3px; }
+
+/* ── Nav ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+  height: 56px;
+  background: rgba(13,17,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text1);
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+.nav-logo span { color: var(--green); }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text1); }
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 0 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* grid background */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(88,166,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88,166,255,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 20%; left: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(88,166,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 1; max-width: 680px; }
+
+.hero-pre {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--green);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.1s forwards;
+}
+.hero-name {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+.hero-name .en {
+  font-family: var(--mono);
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: var(--text2);
+  font-weight: 400;
+  display: block;
+  letter-spacing: 3px;
+  margin-top: 8px;
+}
+.hero-desc {
+  font-size: 15px;
+  color: var(--text2);
+  line-height: 1.8;
+  margin-bottom: 32px;
+  max-width: 520px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.35s forwards;
+}
+.hero-desc strong { color: var(--text1); font-weight: 500; }
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.45s forwards;
+}
+.htag {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+.htag-blue   { color: var(--blue);   border-color: rgba(88,166,255,0.35);  background: rgba(88,166,255,0.08); }
+.htag-green  { color: var(--green);  border-color: rgba(63,185,80,0.35);   background: rgba(63,185,80,0.08); }
+.htag-amber  { color: var(--amber);  border-color: rgba(210,153,34,0.35);  background: rgba(210,153,34,0.08); }
+.htag-purple { color: var(--purple); border-color: rgba(188,140,255,0.35); background: rgba(188,140,255,0.08); }
+
+.hero-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.55s forwards;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 22px;
+  border-radius: 6px;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.btn-primary {
+  background: var(--blue);
+  color: #0d1117;
+}
+.btn-primary:hover { background: #79baff; transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--text1);
+  border: 1px solid var(--border2);
+}
+.btn-outline:hover { background: var(--bg3); border-color: rgba(255,255,255,0.2); transform: translateY(-1px); }
+
+/* hero right — terminal card */
+.hero-right {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  animation: fadeIn 0.8s 0.7s forwards;
+}
+.terminal {
+  width: 340px;
+  background: var(--bg2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+}
+.terminal-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: var(--bg3);
+  border-bottom: 1px solid var(--border);
+}
+.dot { width:10px; height:10px; border-radius:50%; }
+.dot-r { background:#f85149; }
+.dot-y { background:#d29922; }
+.dot-g { background:#3fb950; }
+.terminal-title { font-family:var(--mono); font-size:11px; color:var(--text3); margin-left:6px; }
+.terminal-body { padding: 16px; font-family: var(--mono); font-size: 12px; line-height: 2; }
+.t-prompt { color: var(--green); }
+.t-cmd    { color: var(--text1); }
+.t-out    { color: var(--text2); }
+.t-key    { color: var(--blue); }
+.t-val    { color: var(--amber); }
+.t-ok     { color: var(--green); }
+.t-cursor {
+  display: inline-block;
+  width: 8px; height: 14px;
+  background: var(--green);
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+
+/* ── Section common ── */
+section {
+  padding: 96px 48px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.sec-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--green);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.sec-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--text1);
+  margin-bottom: 8px;
+}
+.sec-sub {
+  font-size: 14px;
+  color: var(--text2);
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ── Skills ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.skill-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px 18px;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.skill-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+.skill-card-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.skill-icon { font-size: 18px; }
+.skill-name { font-weight: 500; font-size: 13px; color: var(--text1); }
+.skill-bar-wrap {
+  height: 3px;
+  background: var(--bg3);
+  border-radius: 2px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.skill-bar {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease;
+}
+.skill-desc-s { font-size: 11.5px; color: var(--text3); line-height: 1.6; }
+
+/* ── Projects ── */
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.proj-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+}
+.proj-card:hover {
+  border-color: rgba(88,166,255,0.3);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+.proj-card.featured {
+  grid-column: 1 / -1;
+  flex-direction: row;
+}
+.proj-preview {
+  background: var(--bg3);
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.proj-card.featured .proj-preview {
+  width: 340px;
+  height: auto;
+  min-height: 220px;
+}
+/* mini chart decoration inside preview */
+.mini-chart {
+  position: absolute;
+  bottom: 12px; left: 12px; right: 12px;
+  height: 60px;
+}
+.mini-bar {
+  position: absolute;
+  bottom: 0;
+  width: 10px;
+  border-radius: 2px 2px 0 0;
+  opacity: 0.7;
+}
+.mini-line {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+}
+.preview-label {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.preview-label .big { font-size: 28px; margin-bottom: 4px; }
+
+.proj-body { padding: 20px 22px; flex: 1; display: flex; flex-direction: column; }
+.proj-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.proj-title-s { font-size: 15px; font-weight: 700; color: var(--text1); }
+.proj-badge-s {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+.badge-s-thesis   { background:rgba(210,153,34,0.15);  color:var(--amber);  border:1px solid rgba(210,153,34,0.3); }
+.badge-s-personal { background:rgba(63,185,80,0.12);   color:var(--green);  border:1px solid rgba(63,185,80,0.25); }
+.proj-desc-s { font-size: 13px; color: var(--text2); line-height: 1.7; margin-bottom: 14px; flex: 1; }
+.proj-findings {
+  background: var(--bg3);
+  border-left: 2px solid var(--blue);
+  border-radius: 0 4px 4px 0;
+  padding: 8px 12px;
+  margin-bottom: 14px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.7;
+}
+.proj-findings strong { color: var(--blue); font-weight: 500; }
+.proj-tech { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:16px; }
+.ptag-s {
+  font-family: var(--mono);
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  background: var(--bg3);
+  color: var(--text2);
+  border: 1px solid var(--border);
+}
+.proj-links { display:flex; gap:10px; margin-top: auto; }
+.plink {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text2);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  transition: all 0.2s;
+}
+.plink:hover { color: var(--text1); border-color: var(--border2); background: var(--bg3); }
+.plink.plink-primary { color: var(--blue); border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.06); }
+.plink.plink-primary:hover { background: rgba(88,166,255,0.12); }
+
+/* gif placeholder */
+.gif-placeholder {
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; padding: 20px;
+  text-align: center;
+}
+.gif-placeholder .icon { font-size: 32px; }
+.gif-placeholder p { font-size: 11px; color: var(--text3); line-height: 1.6; }
+.gif-placeholder .tip { font-size: 10px; color: rgba(255,255,255,0.2); margin-top:4px; }
+
+/* ── Resume section ── */
+.resume-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+.resume-preview-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.resume-preview-card:hover { border-color: var(--border2); }
+.resume-preview-header {
+  background: var(--bg3);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.resume-iframe-wrap {
+  width: 100%;
+  height: 440px;
+  overflow: hidden;
+  position: relative;
+}
+.resume-iframe-wrap iframe {
+  width: 170%;
+  height: 170%;
+  border: none;
+  transform: scale(0.588);
+  transform-origin: top left;
+  pointer-events: none;
+}
+.resume-info { display: flex; flex-direction: column; gap: 16px; }
+.info-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+}
+.info-card-title { font-size: 13px; font-weight: 500; color: var(--text1); margin-bottom: 10px; }
+.info-row { display:flex; justify-content:space-between; align-items:baseline; padding: 5px 0; border-bottom: 1px solid var(--border); }
+.info-row:last-child { border-bottom: none; }
+.info-label { font-size: 12px; color: var(--text2); }
+.info-val { font-family: var(--mono); font-size: 12px; color: var(--text1); }
+.info-val.green { color: var(--green); }
+
+/* ── Contact ── */
+.contact-grid { display: grid; grid-template-columns: repeat(4,1fr); gap:12px; }
+.contact-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+.contact-card:hover { border-color: var(--border2); transform: translateY(-2px); background: var(--bg3); }
+.contact-icon { font-size: 22px; }
+.contact-label { font-size: 12px; color: var(--text2); font-family: var(--mono); }
+.contact-val { font-size: 13px; color: var(--text1); font-weight: 500; word-break: break-all; }
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 32px 48px;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text3);
+}
+footer a { color: var(--text2); text-decoration: none; }
+footer a:hover { color: var(--text1); }
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(20px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity:0; }
+  to   { opacity:1; }
+}
+@keyframes blink {
+  0%,100% { opacity:1; }
+  50%      { opacity:0; }
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  nav { padding: 0 24px; }
+  .hero { padding: 80px 24px 40px; flex-direction: column; min-height: auto; padding-top: 100px; }
+  .hero-right { position: static; transform: none; margin-top: 40px; }
+  .terminal { width: 100%; }
+  section { padding: 64px 24px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { flex-direction: column; }
+  .proj-card.featured .proj-preview { width: 100%; min-height: 160px; }
+  .skills-grid { grid-template-columns: 1fr 1fr; }
+  .resume-wrap { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-logo" href="#"><span>//</span> zsw</a>
+  <ul class="nav-links">
+    <li><a href="#skills">技能</a></li>
+    <li><a href="#projects">项目</a></li>
+    <li><a href="#resume">简历</a></li>
+    <li><a href="#contact">联系</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-pre">// 在找数据分析实习 · 2026届 · 可随时到岗</div>
+    <h1 class="hero-name">
+      周桑炜
+      <span class="en">ZHOU SANGWEI</span>
+    </h1>
+    <p class="hero-desc">
+      软件工程专业背景，专注 <strong>Python 数据分析</strong> 与 <strong>可视化</strong>。<br>
+      毕设项目基于 SEIR 模型构建多智能体仿真平台，围绕核心分析问题设计四组对比实验，产出可在线访问的交互式数据大屏。
+    </p>
+    <div class="hero-tags">
+      <span class="htag htag-blue">Python</span>
+      <span class="htag htag-blue">pandas</span>
+      <span class="htag htag-blue">数据可视化</span>
+      <span class="htag htag-green">Mesa · 多智能体</span>
+      <span class="htag htag-amber">Streamlit</span>
+      <span class="htag htag-purple">ECharts</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">查看项目 →</a>
+      <a href="resume_zhou_final.html" target="_blank" class="btn btn-outline">在线简历</a>
+      <a href="https://github.com/Zhsw7" target="_blank" class="btn btn-outline">GitHub</a>
+    </div>
+  </div>
+
+  <!-- Terminal card -->
+  <div class="hero-right">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span class="terminal-title">~/opinion_sim</span>
+      </div>
+      <div class="terminal-body">
+        <div><span class="t-prompt">❯ </span><span class="t-cmd">python experiment.py</span></div>
+        <div class="t-out">Running 4 experiments...</div>
+        <div><span class="t-key">peak_infected</span>: <span class="t-val">87</span>  <span class="t-out">(no-iv: 134)</span></div>
+        <div><span class="t-key">attack_rate</span>:   <span class="t-val">61%</span> <span class="t-out">(no-iv: 84%)</span></div>
+        <div><span class="t-key">peak_step</span>:     <span class="t-val">28</span>  <span class="t-out">(no-iv: 31)</span></div>
+        <div class="t-ok">✓ dashboard_data.json exported</div>
+        <div style="margin-top:4px"><span class="t-prompt">❯ </span><span class="t-cmd">python -m http.server 8080</span></div>
+        <div class="t-ok">Serving on http://localhost:8080</div>
+        <div style="margin-top:4px"><span class="t-prompt">❯ </span><span class="t-cursor"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- Skills -->
+<section id="skills">
+  <div class="sec-label reveal">// skills</div>
+  <div class="sec-title reveal">专业技能</div>
+  <div class="sec-sub reveal">从数据采集、处理分析到可视化呈现的完整 Python 技术栈，具备工程化项目开发经验。</div>
+
+  <div class="skills-grid">
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">🐍</span>
+        <span class="skill-name">Python</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:82%;background:#58a6ff"></div></div>
+      <div class="skill-desc-s">掌握语法、OOP 及模块化开发；能阅读/维护中等复杂度工程代码，有 1000+ 行完整项目经验</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">📊</span>
+        <span class="skill-name">数据分析 · pandas / NumPy</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:75%;background:#3fb950"></div></div>
+      <div class="skill-desc-s">pandas 清洗/去重/聚合/透视；NumPy 数值计算；能独立完成数据处理流程并提炼分析结论</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">📈</span>
+        <span class="skill-name">数据可视化</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:78%;background:#bc8cff"></div></div>
+      <div class="skill-desc-s">Plotly 交互图表、ECharts 数据大屏、matplotlib 静态图；Streamlit 搭建数据分析 Web 应用</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">🗄️</span>
+        <span class="skill-name">SQL <span style="font-family:var(--mono);font-size:10px;color:var(--amber);background:rgba(210,153,34,0.1);padding:1px 5px;border-radius:3px;margin-left:4px">学习中</span></span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:40%;background:#d29922"></div></div>
+      <div class="skill-desc-s">了解 SELECT / WHERE / GROUP BY / JOIN / 窗口函数等常用语法，能读写基础查询</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">🕸️</span>
+        <span class="skill-name">数据采集</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:65%;background:#58a6ff"></div></div>
+      <div class="skill-desc-s">requests + BeautifulSoup 采集静态页面；了解 User-Agent 伪装、请求间隔等反爬手段</div>
+    </div>
+    <div class="skill-card reveal">
+      <div class="skill-card-top">
+        <span class="skill-icon">🔧</span>
+        <span class="skill-name">工程 & 工具</span>
+      </div>
+      <div class="skill-bar-wrap"><div class="skill-bar" style="width:70%;background:#3fb950"></div></div>
+      <div class="skill-desc-s">Git 版本管理；NetworkX 图数据；熟练使用 Cursor / Claude 辅助开发调试</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Projects -->
+<section id="projects">
+  <div class="sec-label reveal">// projects</div>
+  <div class="sec-title reveal">项目经历</div>
+  <div class="sec-sub reveal">两个项目形成完整闭环：仿真系统产出数据 → BI 大屏承载结论 → GitHub Pages 对外展示。</div>
+
+  <div class="projects-grid">
+
+    <!-- 毕设 featured -->
+    <div class="proj-card featured reveal">
+      <div class="proj-preview">
+        <div class="gif-placeholder">
+          <div class="icon">🎬</div>
+          <p>Streamlit 仿真界面演示</p>
+          <p class="tip">将 demo.gif 放入同目录后<br>替换为 &lt;img src="demo.gif"&gt;</p>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-top">
+          <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+            <span class="proj-title-s">多智能体舆情传播仿真与干预效果分析系统</span>
+            <span class="proj-badge-s badge-s-thesis">毕业设计</span>
+          </div>
+          <span style="font-family:var(--mono);font-size:11px;color:var(--text3);white-space:nowrap;margin-left:8px">2025.03—06</span>
+        </div>
+        <p class="proj-desc-s">基于 SEIR 模型构建 300+ Agent 多智能体仿真平台，模拟舆情在社交网络中的传播过程，设计四组对比实验量化不同干预策略的效果。</p>
+        <div class="proj-findings">
+          <strong>核心发现：</strong>干预时机比强度对峰值压降更关键；信任折损系数 α 使重复干预效率大幅衰减；无标度网络因 KOL 超级节点峰值比随机网络高约 40%。
+        </div>
+        <div class="proj-tech">
+          <span class="ptag-s">Python</span><span class="ptag-s">Mesa</span><span class="ptag-s">NetworkX</span>
+          <span class="ptag-s">pandas</span><span class="ptag-s">Plotly</span><span class="ptag-s">Streamlit</span><span class="ptag-s">SEIR模型</span>
+        </div>
+        <div class="proj-links">
+          <a href="opinion_dashboard.html" class="plink plink-primary">📊 查看数据大屏</a>
+          <a href="https://github.com/Zhsw7" target="_blank" class="plink">⌥ 源码</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BI大屏 -->
+    <div class="proj-card reveal">
+      <div class="proj-preview">
+        <svg class="mini-line" viewBox="0 0 300 80" preserveAspectRatio="none">
+          <polyline points="0,70 20,68 40,62 60,50 80,35 100,28 120,24 140,26 160,32 180,40 200,50 220,58 240,64 260,68 280,70 300,72"
+            fill="none" stroke="rgba(248,81,73,0.5)" stroke-width="2"/>
+          <polyline points="0,70 20,70 40,70 60,69 80,65 100,55 120,42 140,36 160,34 180,38 200,46 220,55 240,62 260,67 280,70 300,71"
+            fill="none" stroke="rgba(88,166,255,0.4)" stroke-width="1.5" stroke-dasharray="4 3"/>
+        </svg>
+        <div class="preview-label">
+          <div class="big">📊</div>
+          <div>BI 数据大屏</div>
+        </div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-top">
+          <span class="proj-title-s">舆情传播规律分析 BI 数据大屏</span>
+          <span class="proj-badge-s badge-s-personal">个人项目</span>
+        </div>
+        <p class="proj-desc-s">将毕设四组实验结论可视化为可在线访问的交互式分析看板。纯静态实现，自动读取仿真导出的 JSON 数据，无需后端服务。</p>
+        <div class="proj-findings">
+          <strong>技术亮点：</strong>处理了不同仿真参数下曲线长度不一致的渲染问题，在 JS 层实现序列自动 padding 对齐。
+        </div>
+        <div class="proj-tech">
+          <span class="ptag-s">Chart.js</span><span class="ptag-s">HTML/JS</span>
+          <span class="ptag-s">Python</span><span class="ptag-s">JSON</span><span class="ptag-s">GitHub Pages</span>
+        </div>
+        <div class="proj-links">
+          <a href="opinion_dashboard.html" class="plink plink-primary">🚀 在线查看</a>
+          <a href="https://github.com/Zhsw7" target="_blank" class="plink">⌥ 源码</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Resume -->
+<section id="resume">
+  <div class="sec-label reveal">// resume</div>
+  <div class="sec-title reveal">个人简历</div>
+  <div class="sec-sub reveal">数据分析实习方向，2026届，可随时到岗。</div>
+
+  <div class="resume-wrap reveal">
+    <div class="resume-preview-card">
+      <div class="resume-preview-header">
+        <span class="dot dot-r"></span>
+        <span class="dot dot-y"></span>
+        <span class="dot dot-g"></span>
+        <span style="font-family:var(--mono);font-size:11px;color:var(--text3);margin-left:6px">resume_zhou_final.html</span>
+      </div>
+      <div class="resume-iframe-wrap">
+        <iframe src="resume_zhou_final.html" title="简历预览" scrolling="no"></iframe>
+      </div>
+    </div>
+
+    <div class="resume-info">
+      <div class="info-card">
+        <div class="info-card-title">基本信息</div>
+        <div class="info-row"><span class="info-label">求职方向</span><span class="info-val green">数据分析实习</span></div>
+        <div class="info-row"><span class="info-label">毕业时间</span><span class="info-val">2026年6月</span></div>
+        <div class="info-row"><span class="info-label">到岗时间</span><span class="info-val green">随时</span></div>
+        <div class="info-row"><span class="info-label">院校专业</span><span class="info-val">南京财经大学 · 软件工程</span></div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-title">核心技能栈</div>
+        <div class="info-row"><span class="info-label">数据处理</span><span class="info-val">pandas · NumPy</span></div>
+        <div class="info-row"><span class="info-label">可视化</span><span class="info-val">Plotly · ECharts · matplotlib</span></div>
+        <div class="info-row"><span class="info-label">框架工具</span><span class="info-val">Streamlit · Mesa · NetworkX</span></div>
+        <div class="info-row"><span class="info-label">数据库</span><span class="info-val" style="color:var(--amber)">SQL（学习中）</span></div>
+      </div>
+      <div style="display:flex;gap:10px">
+        <a href="resume_zhou_final.html" target="_blank" class="btn btn-primary" style="flex:1;justify-content:center">在新标签打开</a>
+        <a href="resume_zhou_final.html" download class="btn btn-outline" style="flex:1;justify-content:center">下载 HTML</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="sec-label reveal">// contact</div>
+  <div class="sec-title reveal">联系方式</div>
+  <div class="sec-sub reveal">欢迎实习机会合作，可随时联系。</div>
+  <div class="contact-grid reveal">
+    <a href="tel:15705188350" class="contact-card">
+      <span class="contact-icon">📱</span>
+      <span class="contact-label">手机</span>
+      <span class="contact-val">15705188350</span>
+    </a>
+    <a href="mailto:zhsw7@foxmail.com" class="contact-card">
+      <span class="contact-icon">📧</span>
+      <span class="contact-label">邮箱</span>
+      <span class="contact-val">zhsw7@foxmail.com</span>
+    </a>
+    <a href="https://github.com/Zhsw7" target="_blank" class="contact-card">
+      <span class="contact-icon">⌥</span>
+      <span class="contact-label">GitHub</span>
+      <span class="contact-val">github.com/Zhsw7</span>
+    </a>
+    <div class="contact-card" style="cursor:default">
+      <span class="contact-icon">📍</span>
+      <span class="contact-label">状态</span>
+      <span class="contact-val" style="color:var(--green)">求职中 · 随时到岗</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Built with HTML · CSS · JS &nbsp;·&nbsp; Deployed on <a href="https://github.com/Zhsw7" target="_blank">GitHub Pages</a> &nbsp;·&nbsp; © 2025 周桑炜</p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => entry.target.classList.add('visible'), i * 60);
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Skill bar animation on scroll
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => { bar.style.width = w; }, 100);
+      });
+      barObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.skills-grid').forEach(el => barObserver.observe(el));
+</script>
+</body>
+</html>

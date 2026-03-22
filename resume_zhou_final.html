@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>周桑炜 · 数据分析实习</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Noto Sans SC','PingFang SC','Microsoft YaHei',sans-serif;
+  background: #e8ebee;
+  padding: 24px 16px;
+  color: #1a1a1a;
+}
+
+.resume {
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.13);
+  overflow: hidden;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0f2537 0%, #1a3f5c 100%);
+  color: #fff;
+  padding: 18px 28px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #2196f3, #00bcd4, #4caf50);
+}
+.h-name {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 22pt;
+  font-weight: 700;
+  letter-spacing: 4px;
+  line-height: 1;
+}
+.h-tagline {
+  font-size: 9.5pt;
+  color: #7dd3fc;
+  letter-spacing: 0.8px;
+  margin-top: 5px;
+}
+.h-contacts {
+  text-align: right;
+  font-size: 8.2pt;
+  line-height: 1.85;
+  opacity: 0.92;
+}
+.h-contacts a { color: #7dd3fc; text-decoration: none; }
+.h-site {
+  font-size: 8.5pt;
+  color: #4ade80;
+  font-weight: 500;
+  margin-top: 1px;
+  letter-spacing: 0.3px;
+}
+
+/* ── Content ── */
+.content { padding: 14px 28px 16px; }
+
+.section { margin-bottom: 11px; }
+.section-title {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0f2537;
+  border-left: 3px solid #2196f3;
+  padding-left: 7px;
+  margin-bottom: 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ── Education ── */
+.edu-row { display:flex; justify-content:space-between; align-items:baseline; }
+.edu-school { font-weight:700; font-size:9.2pt; }
+.edu-meta { font-size:8.2pt; color:#555; margin-left:6px; font-weight:400; }
+.edu-time { font-size:8pt; color:#999; white-space:nowrap; }
+.edu-courses { font-size:7.8pt; color:#888; margin-top:2px; }
+
+/* ── Skills ── */
+.skill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px 20px;
+}
+.skill-row { display:flex; gap:0; align-items:baseline; padding: 2px 0; }
+.skill-name {
+  width: 82px;
+  font-size: 8.2pt;
+  font-weight: 500;
+  color: #333;
+  flex-shrink: 0;
+}
+.skill-desc { font-size: 8.2pt; color: #555; line-height: 1.55; }
+.skill-tag {
+  display: inline-block;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-size: 7pt;
+  padding: 0px 5px;
+  border-radius: 2px;
+  margin-right: 3px;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.skill-tag.new { background:#e8f5e9; color:#2e7d32; }
+
+/* ── Projects ── */
+.project { margin-bottom: 9px; }
+.proj-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 2px;
+}
+.proj-name { font-weight:700; font-size:9.5pt; color:#0f2537; }
+.proj-badge {
+  font-size: 7pt;
+  padding: 1px 7px;
+  border-radius: 10px;
+  font-weight: 500;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.badge-thesis  { background:#fff3e0; color:#e65100; border:1px solid #ffcc02; }
+.badge-practice{ background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; }
+.proj-time { font-size:7.8pt; color:#aaa; white-space:nowrap; }
+.proj-focus {
+  font-size: 8pt;
+  color: #1565c0;
+  font-weight: 500;
+  margin-bottom: 3px;
+  padding-left: 1px;
+}
+.proj-focus::before { content: '◆ '; font-size:6pt; vertical-align:1px; }
+.proj-line {
+  font-size: 8.2pt;
+  color: #444;
+  line-height: 1.62;
+  margin-bottom: 2px;
+  padding-left: 1px;
+}
+.proj-line b { color: #1a1a1a; font-weight: 500; }
+.proj-tags { margin-top:5px; display:flex; flex-wrap:wrap; gap:3px; }
+.ptag {
+  background:#f0f4ff;
+  color:#2148c0;
+  font-size:7pt;
+  padding:1px 6px;
+  border-radius:2px;
+  font-weight:500;
+}
+
+/* ── Others ── */
+.other-item { font-size:8.2pt; color:#555; margin-bottom:3px; line-height:1.6; }
+.other-item b { color:#1a1a1a; font-weight:500; }
+
+/* ── Self eval ── */
+.eval { font-size:8.2pt; color:#555; line-height:1.68; }
+
+/* ── Print ── */
+@media print {
+  body { background:none; padding:0; }
+  .resume { box-shadow:none; border-radius:0; width:210mm; min-height:297mm; }
+  @page { size:A4; margin:0; }
+}
+</style>
+</head>
+<body>
+<div class="resume">
+
+  <!-- Header -->
+  <div class="header">
+    <div>
+      <div class="h-name">周桑炜</div>
+      <div class="h-tagline">数据分析实习 · Python · 可视化 · 多智能体仿真</div>
+    </div>
+    <div class="h-contacts">
+      📱 15705188350 &nbsp;·&nbsp; 📧 <a href="mailto:zhsw7@foxmail.com">zhsw7@foxmail.com</a><br>
+      💻 <a href="https://github.com/Zhsw7">github.com/Zhsw7</a><br>
+      <div class="h-site">🌐 个人作品集（建设中）</div>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- 教育背景 -->
+    <div class="section">
+      <div class="section-title">教育背景</div>
+      <div class="edu-row">
+        <div>
+          <span class="edu-school">南京财经大学</span>
+          <span class="edu-meta">软件工程专业 · 本科 · 2026届</span>
+        </div>
+        <div class="edu-time">2022.09 — 2026.06</div>
+      </div>
+      <div class="edu-courses">主修：数据结构 · 数据库原理 · 计算机网络 · Python程序设计 · 软件工程 · Web前端开发</div>
+    </div>
+
+    <!-- 专业技能 -->
+    <div class="section">
+      <div class="section-title">专业技能</div>
+      <div class="skill-grid">
+        <div class="skill-row">
+          <div class="skill-name">Python</div>
+          <div class="skill-desc">掌握语法及OOP；能阅读/维护中等复杂度工程代码，有完整项目经验</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">数据分析</div>
+          <div class="skill-desc">pandas（清洗/聚合/透视）、NumPy；能从数据提炼规律并形成结论</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">数据可视化</div>
+          <div class="skill-desc">Plotly 交互图表、ECharts 大屏、matplotlib、Streamlit 数据应用</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">SQL <span class="skill-tag new">学习中</span></div>
+          <div class="skill-desc">了解 SELECT / GROUP BY / JOIN / 窗口函数等常用查询语法</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">数据采集</div>
+          <div class="skill-desc">requests + BeautifulSoup 采集静态页面；了解反爬策略，存储 CSV/JSON</div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name">工程 & 工具</div>
+          <div class="skill-desc">Git；NetworkX 图数据；熟练使用 Cursor / Claude 辅助开发调试</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 项目经历 -->
+    <div class="section">
+      <div class="section-title">项目经历</div>
+
+      <!-- 项目一：毕设 -->
+      <div class="project">
+        <div class="proj-header">
+          <div>
+            <span class="proj-name">多智能体舆情传播仿真与干预效果分析系统</span>
+            <span class="proj-badge badge-thesis">毕业设计</span>
+          </div>
+          <div class="proj-time">2025.03 — 2025.06</div>
+        </div>
+        <div class="proj-focus">核心问题：不同干预时机与强度，对舆情传播峰值有多大压降效果？</div>
+        <div class="proj-line"><b>分析设计：</b>基于 SEIR 模型设计四组对比实验——干预时机对比、参数敏感性、多次干预边际递减、网络拓扑差异，量化各因素对峰值传播数和感染率的影响。</div>
+        <div class="proj-line"><b>关键发现：</b>干预时机比强度对峰值压降更关键；信任折损系数 α 使重复干预效率大幅衰减；无标度网络因 KOL 超级节点峰值比随机网络高约 40%，针对 KOL 的精准干预效率显著更高。</div>
+        <div class="proj-line"><b>可视化：</b>Plotly 生成交互式 SEIR 曲线；另配套 ECharts 数据大屏展示四组实验结论，已部署至 GitHub Pages 供在线查看。</div>
+        <div class="proj-line"><b>技术实现：</b>Mesa 框架构建 300+ Agent 仿真，设计 Normal/KOL/Official 三种异质 Agent；NetworkX 实现三种网络拓扑；pandas 处理时序数据；Streamlit 搭建 5 Tab 可视化分析前端。</div>
+        <div class="proj-tags">
+          <span class="ptag">Python</span><span class="ptag">Mesa</span><span class="ptag">NetworkX</span>
+          <span class="ptag">pandas</span><span class="ptag">Plotly</span><span class="ptag">ECharts</span><span class="ptag">Streamlit</span>
+        </div>
+      </div>
+
+      <!-- 项目二：豆瓣 -->
+      <div class="project">
+        <div class="proj-header">
+          <div>
+            <span class="proj-name">豆瓣电影 Top250 数据采集与评分分布分析</span>
+            <span class="proj-badge badge-practice">自学练手</span>
+          </div>
+        </div>
+        <div class="proj-focus">核心问题：不同类型电影的评分与评价人数分布有何规律？</div>
+        <div class="proj-line"><b>采集与清洗：</b>requests 分页爬取片名、评分、评价人数、类型标签，处理 User-Agent 与翻页；BeautifulSoup 解析 HTML；pandas 去重、标签拆解与聚合统计。</div>
+        <div class="proj-line"><b>分析结论：</b>剧情类均分最高但评价人数分布最分散；动画/动作类评价人数更集中于高分区间，呈现更强"大众共识"特征；结果以 matplotlib 出图。</div>
+        <div class="proj-tags">
+          <span class="ptag">Python</span><span class="ptag">requests</span>
+          <span class="ptag">BeautifulSoup</span><span class="ptag">pandas</span><span class="ptag">matplotlib</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 其他经历 -->
+    <div class="section">
+      <div class="section-title">其他经历</div>
+      <div class="other-item"><b>作品集网站（建设中）：</b>个人网站部署于 GitHub Pages，收录毕设大屏、项目介绍及源码链接，供面试官在线查看。</div>
+      <div class="other-item"><b>AI 工具实践：</b>持续使用 Claude、Cursor 辅助开发与调试，熟悉 Prompt 编写；关注 AI Agent、工作流编排等方向。</div>
+      <div class="other-item"><b>技术社区：</b>常阅读掘金、官方文档及英文技术博客；遇到问题查阅 Stack Overflow，有独立排查工程问题的习惯。</div>
+    </div>
+
+    <!-- 自我评价 -->
+    <div class="section">
+      <div class="section-title">自我评价</div>
+      <div class="eval">
+        软件工程专业背景，具备从数据采集、清洗处理到可视化呈现的 Python 全流程动手能力。毕设项目围绕核心分析问题设计四组对比实验，有实际的数据分析思维沉淀，并配套产出了可在线访问的 ECharts 数据大屏。熟练使用 AI 辅助开发工具，学习迁移能力强，能快速上手新框架与库。服从安排，可随时到岗。
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
